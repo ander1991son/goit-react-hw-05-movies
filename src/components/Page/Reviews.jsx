@@ -6,7 +6,7 @@ const Reviews = () => {
   const [reviews, setReviews] = useState([]);
   const { movieId } = useParams();
 
-  const API_KEY = 'e20674bfb837f8685226d846974c1e4f';
+  const API_KEY = 'ecfadc1d9b2290d9331728c2ab535e58';
   const API_URL = 'https://api.themoviedb.org/3';
 
   async function fetchMovieReviews() {
