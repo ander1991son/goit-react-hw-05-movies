@@ -44,7 +44,7 @@ const MovieDetails = () => {
 
   useEffect(() => {
     fetchMovieDetails();
-  }, [movieId]);
+  }, []);
 
   return (
     <div>

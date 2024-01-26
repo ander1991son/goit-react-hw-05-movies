@@ -23,7 +23,7 @@ const Cast = () => {
 
   useEffect(() => {
     fetchMovieCast();
-  }, [movieId]);
+  }, []);
 
   return (
     <div>

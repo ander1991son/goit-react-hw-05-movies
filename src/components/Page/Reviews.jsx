@@ -23,7 +23,7 @@ const Reviews = () => {
 
   useEffect(() => {
     fetchMovieReviews();
-  }, [movieId]);
+  }, []);
 
   return (
     <div>
