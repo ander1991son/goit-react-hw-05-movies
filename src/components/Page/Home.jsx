@@ -28,15 +28,12 @@ const Home = () => {
 
   return (
     <div>
+      <h1>Trading Today</h1>
       {movies.length > 0 ? (
         <ul>
           {movies.map(movie => (
             <li key={movie.id}>
               <Link to={`/movies/${movie.id}`}>
-                {/* <img
-                  src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                  alt={movie.title}
-                /> */}
                 <p>{movie.title}</p>
               </Link>
             </li>

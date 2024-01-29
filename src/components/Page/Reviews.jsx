@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { Outlet, useParams } from 'react-router-dom';
 
 const Reviews = () => {
   const [reviews, setReviews] = useState([]);
@@ -37,6 +37,7 @@ const Reviews = () => {
           </li>
         ))}
       </ul>
+      <Outlet />
     </div>
   );
 };

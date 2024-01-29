@@ -1,27 +1,8 @@
-// import React from 'react';
-// import { useParams } from 'react-router-dom';
-
-// const MovieDetails = () => {
-//   const { movieId } = useParams();
-
-//   // Obtén los detalles de la película según el ID
-//   // Aquí deberías tener lógica para cargar la información específica de la película, incluida la URL de la imagen.
-
-//   return (
-//     <div>
-//       <h2>Detalles de la película {movieId}</h2>
-//       {/* Mostrar la imagen correspondiente */}
-//       <img src={`/path-to-image-${movieId}.jpg`} alt={`Movie ${movieId}`} />
-//       {/* Otros detalles de la película */}
-//     </div>
-//   );
-// };
-
-// export default MovieDetails;
-
 import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useParams, Link, NavLink, Routes, Route } from 'react-router-dom';
+import Cast from './Cast';
+import Reviews from './Reviews';
 
 const MovieDetails = () => {
   const [movieDetails, setMovieDetails] = useState({});
@@ -45,27 +26,29 @@ const MovieDetails = () => {
     fetchMovieDetails();
   }, [fetchMovieDetails]);
 
-  // async function fetchMovieDetails() {
-  //   try {
-  //     const response = await axios.get(
-  //       `${API_URL}/movie/${movieId}?api_key=${API_KEY}`
-  //     );
-
-  //     setMovieDetails(response.data);
-  //   } catch (error) {
-  //     console.error('Error al obtener detalles de la película:', error);
-  //   }
-  // }
-
-  // useEffect(() => {
-  //   fetchMovieDetails();
-  // }, [movieId]);
-
   return (
     <div>
+      <Link to="/">{<button>Back</button>}</Link>
+      <div>
+        {movieDetails.poster_path && (
+          <img
+            width="100px"
+            height="100px"
+            src={`https://image.tmdb.org/t/p/w500${movieDetails.poster_path}`}
+            alt={movieDetails.title}
+          />
+        )}
+      </div>
       <h2>{movieDetails.title}</h2>
       <p>{movieDetails.overview}</p>
-      {/* Agrega más detalles según tus necesidades */}
+      <div>
+        <NavLink to="cast">Cast</NavLink>
+        <NavLink to="reviews">Reviews</NavLink>
+        <Routes>
+          <Route path="cast" element={<Cast />} />
+          <Route path="reviews" element={<Reviews />} />
+        </Routes>
+      </div>
     </div>
   );
 };
