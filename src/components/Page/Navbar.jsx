@@ -1,4 +1,5 @@
 import React from 'react';
+import { Suspense } from 'react';
 import styled from 'styled-components';
 import css from './Navbar.module.css';
 import { NavLink, Outlet } from 'react-router-dom';
@@ -18,7 +19,9 @@ const Navbar = () => {
         <StyledLink to="/">Home</StyledLink>
         <StyledLink to="/movies">Movies</StyledLink>
       </div>
-      <Outlet />
+      <Suspense fallback={<div>Loading...</div>}>
+        <Outlet />
+      </Suspense>
     </div>
   );
 };

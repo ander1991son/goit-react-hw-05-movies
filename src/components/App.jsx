@@ -1,29 +1,79 @@
+import React, { Suspense, lazy } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import Movies from './Page/Movies';
-import Navbar from './Page/Navbar';
-import Home from './Page/Home';
-import MovieDetails from './Page/MoviesDetails';
-import Cast from './Page/Cast';
-import Reviews from './Page/Reviews';
+// import { Route, Routes } from 'react-router-dom';
+// import { Suspense, lazy } from 'react';
+// // import Movies from './Page/Movies';
+// // import Navbar from './Page/Navbar';
+// // import Home from './Page/Home';
+// // import MovieDetails from './Page/MoviesDetails';
+// // import Cast from './Page/Cast';
+// // import Reviews from './Page/Reviews';
+
+const Movies = lazy(() => import('./Page/Movies'));
+const Navbar = lazy(() => import('./Page/Navbar'));
+const Home = lazy(() => import('./Page/Home'));
+const MovieDetails = lazy(() => import('./Page/MoviesDetails'));
+const Cast = lazy(() => import('./Page/Cast'));
+const Reviews = lazy(() => import('./Page/Reviews'));
 
 export const App = () => {
   return (
     <div>
       <Routes>
-        <Route path="/" element={<Navbar />}>
-          <Route index element={<Home />} />
-          <Route path="movies" element={<Movies />} />
-          <Route path="movies/:movieId" element={<MovieDetails />}>
-            <Route path="cast" element={<Cast />} />
-            <Route path="reviews" element={<Reviews />} />
+        <Route
+          path="/"
+          element={
+            <Suspense fallback={<div>Loading...</div>}>
+              <Navbar />
+            </Suspense>
+          }
+        >
+          <Route
+            index
+            element={
+              <Suspense fallback={<div>Loading...</div>}>
+                <Home />
+              </Suspense>
+            }
+          />
+          <Route
+            path="movies"
+            element={
+              <Suspense fallback={<div>Loading...</div>}>
+                <Movies />
+              </Suspense>
+            }
+          />
+          <Route
+            path="movies/:movieId"
+            element={
+              <Suspense fallback={<div>Loading...</div>}>
+                <MovieDetails />
+              </Suspense>
+            }
+          >
+            <Route
+              path="cast"
+              element={
+                <Suspense fallback={<div>Loading...</div>}>
+                  <Cast />
+                </Suspense>
+              }
+            />
+            <Route
+              path="reviews"
+              element={
+                <Suspense fallback={<div>Loading...</div>}>
+                  <Reviews />
+                </Suspense>
+              }
+            />
           </Route>
         </Route>
       </Routes>
     </div>
   );
 };
-
-export default App;
 
 //////////////////////////////////////  original
 // import React, { useEffect, useState } from 'react';

@@ -1,13 +1,23 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import css from './MoviesDetails.module.css';
+import styled from 'styled-components';
 import axios from 'axios';
-import { useParams, Link, NavLink, Routes, Route } from 'react-router-dom';
+import {
+  useParams,
+  NavLink,
+  Routes,
+  Route,
+  useNavigate,
+} from 'react-router-dom';
 import Cast from './Cast';
 import Reviews from './Reviews';
 
 const MovieDetails = () => {
   const [movieDetails, setMovieDetails] = useState({});
   const { movieId } = useParams();
+  const navigate = useNavigate();
+  // const location = useLocation();
+  // const backLink = location.state?.from ?? '/books';
 
   const API_KEY = 'ecfadc1d9b2290d9331728c2ab535e58';
   const API_URL = 'https://api.themoviedb.org/3';
@@ -27,11 +37,20 @@ const MovieDetails = () => {
     fetchMovieDetails();
   }, [fetchMovieDetails]);
 
+  const StyledLink = styled(NavLink)`
+    color: black;
+
+    &.active {
+      color: red;
+    }
+  `;
+
   return (
     <div>
-      <Link to="/">
+      {/* <Link to="/">
         <button>Go back</button>
-      </Link>
+      </Link> */}
+      <button onClick={() => navigate(-1)}>Go Back</button>
       <div className={css.movieDetails}>
         <div>
           {movieDetails.poster_path && (
@@ -68,10 +87,10 @@ const MovieDetails = () => {
         <ul className={css.movienavlink}>
           <h2>Additional Information</h2>
           <li>
-            <NavLink to="cast">Cast</NavLink>
+            <StyledLink to="cast">Cast</StyledLink>
           </li>
           <li>
-            <NavLink to="reviews">Reviews</NavLink>
+            <StyledLink to="reviews">Reviews</StyledLink>
           </li>
         </ul>
         <Routes>

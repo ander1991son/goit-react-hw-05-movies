@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
+
 import axios from 'axios';
 
 const Movies = () => {
@@ -50,7 +51,7 @@ const Movies = () => {
     setSearchQuery(event.target.value);
   };
 
-  // Función para realizar la búsqueda
+  //Función para realizar la búsqueda
   const searchMovies = async () => {
     try {
       const response = await fetch(
